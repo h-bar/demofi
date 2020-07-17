@@ -68,7 +68,7 @@ class LongTextIn extends React.Component {
 function DataIn(props) {
   return (
     <div>
-      <LongTextIn updateData={props.updateData} data={props.data} cate="data" name="testData" placeholder="Input Some Data"></LongTextIn>
+      <LongTextIn updateData={props.updateData} data={props.data} cate="data" name="content" placeholder="Input Some Data"></LongTextIn>
     </div>)
 }
 
@@ -87,35 +87,40 @@ function SubmitBtn(props) {
   )
 }
 
-function ResultPanel(props) {
-  return (
-    <div>
-      {JSON.stringify(props.content)}
-    </div>
-  )
-}
-
-class ResultEditor extends React.Component {
-  handleChange = (e) => {
-    let result = JSON.parse(e.target.value)
-    this.props.updateReult(result)
-  }
-
+class ClassificationResult extends React.Component {
   render() {
-    let value = JSON.stringify(this.props.value)
+    let result = this.props.content.result
+    if (result === undefined) return <div></div>
+
+    let byClass = {}
+    for (let e in result) {
+      let cls = result[e]
+      if (!(cls in byClass)) {
+        byClass[cls] = []
+      }
+      byClass[cls].push(<button>{e}</button>)
+    }
+
+    let classRows = []
+    for (let cls in byClass) {
+      classRows.push(<div>
+        <span>{cls}: </span>{byClass[cls]}
+      </div>)
+    }
     return (
-      <div className='row'>
-        <textarea placeholder={this.props.placeholder} onChange={this.handleChange} value={value}></textarea>
+      <div>
+        {classRows}
       </div>
     )
   }
 }
 
-function ResultEditPanel(props) {
+
+function ResultPanel(props) {
   let isDisable = props.appState !== appStates.edited
   return (
     <div>
-      <ResultEditor updateReult={props.updateResult} value={props.content}></ResultEditor>
+      <ClassificationResult content={props.content}></ClassificationResult>
       <button className="btn btn-primary" disabled={isDisable}>Train the model</button>
     </div>
   )
@@ -187,8 +192,7 @@ class App extends React.Component {
         <DataIn updateData={this.updateData} data={this.state.req}></DataIn>
         <ParamIn updateData={this.updateData} data={this.state.req}></ParamIn>
         <SubmitBtn appState={this.state.state} content="Submit" onClick={this.sendData}></SubmitBtn>
-        <ResultPanel content={this.state.resp}></ResultPanel>
-        <ResultEditPanel appState={this.state.state} content={this.state.resp} updateResult={this.updateResult}></ResultEditPanel>
+        { this.state.state === appStates.responded ? <ResultPanel content={this.state.resp}></ResultPanel> : <div></div>}
       </div>
     );
   }
