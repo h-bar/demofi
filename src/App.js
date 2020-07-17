@@ -87,7 +87,28 @@ function SubmitBtn(props) {
   )
 }
 
+function ClassPicker(props) {
+  const classes = ['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB']
+  const classPanel = classes.map((cls) => (
+    <button>{cls}</button>
+  ))
+  return <div>
+    <span>{props.label}</span>
+    {classPanel}
+  </div>
+}
+
 class ClassificationResult extends React.Component {
+  state = {
+    selected: null
+  }
+
+  handleClick = (e) => {
+    this.setState({
+      selected: e
+    })
+  }
+
   render() {
     let result = this.props.content.result
     if (result === undefined) return <div></div>
@@ -98,7 +119,7 @@ class ClassificationResult extends React.Component {
       if (!(cls in byClass)) {
         byClass[cls] = []
       }
-      byClass[cls].push(<button>{e}</button>)
+      byClass[cls].push(<button onClick={() => this.handleClick(e)}>{e}</button>)
     }
 
     let classRows = []
@@ -108,8 +129,16 @@ class ClassificationResult extends React.Component {
       </div>)
     }
     return (
-      <div>
-        {classRows}
+      <div className='row'>
+        <div className='col-6'>
+          {classRows}  
+        </div>
+        <div className='col-6'>
+          { this.state.selected !== null ? 
+            <ClassPicker label={this.state.selected}></ClassPicker> :
+            <div></div>
+          }
+        </div>
       </div>
     )
   }
@@ -120,7 +149,7 @@ function ResultPanel(props) {
   let isDisable = props.appState !== appStates.edited
   return (
     <div>
-      <ClassificationResult content={props.content}></ClassificationResult>
+      <ClassificationResult content={props.content} onChange={props.onChange}></ClassificationResult>
       <button className="btn btn-primary" disabled={isDisable}>Train the model</button>
     </div>
   )
@@ -192,7 +221,7 @@ class App extends React.Component {
         <DataIn updateData={this.updateData} data={this.state.req}></DataIn>
         <ParamIn updateData={this.updateData} data={this.state.req}></ParamIn>
         <SubmitBtn appState={this.state.state} content="Submit" onClick={this.sendData}></SubmitBtn>
-        { this.state.state === appStates.responded ? <ResultPanel content={this.state.resp}></ResultPanel> : <div></div>}
+        { this.state.state === appStates.responded ? <ResultPanel content={this.state.resp} onChange={this.updateResult}></ResultPanel> : <div></div>}
       </div>
     );
   }
