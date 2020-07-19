@@ -3,32 +3,13 @@ import './App.css';
 import { render } from '@testing-library/react';
 
 import { TextAreaIn, OptionBtnsIn } from './components/input';
+import { getReq, postReq } from './request'
 
 const appStates = {
   'not_ready': 0,
   'ready':1,
   'submited': 2,
   'responded': 3
-}
-
-const server_addr = "http://127.0.0.1:5000"
-async function postReq(endPoint, data) {
-  let url = server_addr + endPoint
-  const response = await fetch(url, {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  return response.json()
-}
-
-async function getReq(endPoint, data) {
-  let url = server_addr + endPoint
-  const response = await fetch(url)
-  return response.json()
 }
 
 function SubmitBtn(props) {
