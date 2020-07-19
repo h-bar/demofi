@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import { render } from '@testing-library/react';
 
+import { TextAreaIn, OptionBtnsIn } from './components/input';
+
 const appStates = {
   'not_ready': 0,
   'ready':1,
@@ -28,56 +30,6 @@ async function getReq(endPoint, data) {
   const response = await fetch(url)
   return response.json()
 }
-
-class OptionBtnIn extends React.Component {
-  handleClick = (value) => {
-    let data = this.props.data
-    data[this.props.cate][this.props.name] = value
-    this.props.updateData(data)
-  }
-
-  render() {
-    const btns = this.props.options.map((option) => (
-      <button className="col-3 btn  btn-light"key={option} onClick={() => this.handleClick(option)}>{option}</button>
-    ))
-    return (
-      <div className="row">
-        {btns}
-      </div>
-    )
-  }
-}
-
-class LongTextIn extends React.Component {
-  handleChange = (e) => {
-    let data = this.props.data
-    data[this.props.cate][this.props.name] = e.target.value
-    this.props.updateData(data)
-  }
-
-  render() {
-    return (
-      <div className='row'>
-        <textarea style={{width: '100%'}} placeholder={this.props.placeholder} onChange={this.handleChange}></textarea>
-      </div>
-    )
-  }
-}
-
-function DataIn(props) {
-  return (
-    <div>
-      <LongTextIn updateData={props.updateData} data={props.data} cate="data" name="content" placeholder="Input Some Data"></LongTextIn>
-    </div>)
-}
-
-function ParamIn(props) {
-  return (
-    <div>
-      <OptionBtnIn updateData={props.updateData} data={props.data} cate="param" name="testParam" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf"]}></OptionBtnIn>
-    </div>)
-}
-
 
 function SubmitBtn(props) {
   let isDisable = props.appState === appStates.not_ready
@@ -192,13 +144,6 @@ class App extends React.Component {
     return false
   }
 
-  updateData = (data) => {
-    this.setState({
-      req: data,
-      state: this.paramReady(data.param) && this.dataReady(data.data) ? appStates.ready : appStates.not_ready
-    })
-  }
-
   sendData = (e) => {
     this.setState({
       state: appStates.submited
@@ -219,6 +164,24 @@ class App extends React.Component {
     })
   }
 
+  updateData = (name, value) => {
+    let propPath = name.split('.')
+    let propKey = propPath.pop()
+
+    let data = this.state.req
+    let prop = data
+
+    for (let propName of propPath) {
+      prop = prop[propName]
+    }
+    prop[propKey] = value
+
+    this.setState({
+      req: data,
+      state: this.paramReady(data.param) && this.dataReady(data.data) ? appStates.ready : appStates.not_ready
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -232,8 +195,8 @@ class App extends React.Component {
           </p>
         </div>
         <div className="container">
-          <DataIn updateData={this.updateData} data={this.state.req}></DataIn>
-          <ParamIn updateData={this.updateData} data={this.state.req}></ParamIn>
+          <TextAreaIn onUpdate={this.updateData} name="data.content" placeholder="Input some data"></TextAreaIn>
+          <OptionBtnsIn onUpdate={this.updateData} name="param.content" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf"]}></OptionBtnsIn>
           <SubmitBtn appState={this.state.state} content="Submit" onClick={this.sendData}></SubmitBtn>
           { this.state.state === appStates.responded ? <ResultPanel content={this.state.resp} onChange={this.updateResult}></ResultPanel> : <div></div>}
         </div>
