@@ -1,6 +1,4 @@
 import React from 'react';
-import './App.css';
-import { render } from '@testing-library/react';
 
 import { TextAreaIn, OptionBtnIn } from './components/input';
 import { ClassificationDisplay } from './components/display';
