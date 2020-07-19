@@ -152,11 +152,10 @@ class ClassificationResult extends React.Component {
 
 
 function ResultPanel(props) {
-  let isDisable = props.appState !== appStates.edited
   return (
     <div>
       <ClassificationResult content={props.content} onChange={props.onChange}></ClassificationResult>
-      <button className="btn btn-primary" disabled={isDisable}>Train the model</button>
+      <button className="btn btn-primary">Download Result</button>
     </div>
   )
 }
