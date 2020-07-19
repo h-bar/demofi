@@ -6,8 +6,7 @@ const appStates = {
   'not_ready': 0,
   'ready':1,
   'submited': 2,
-  'responded': 3,
-  'edited': 4
+  'responded': 3
 }
 
 const server_addr = "http://127.0.0.1:5000"
@@ -204,14 +203,12 @@ class App extends React.Component {
         resp: resp,
         state: appStates.responded
       })
-      this.resp_ori = resp
     })
   }
 
   updateResult = (result) => {
     this.setState({
-      resp: result,
-      state: this.resp_ori !== result ? appStates.edited : appStates.submited
+      resp: result
     })
   }
 
