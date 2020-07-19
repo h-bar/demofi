@@ -89,7 +89,7 @@ function SubmitBtn(props) {
 function ClassPicker(props) {
   const classes = ['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB']
   const classPanel = classes.map((cls) => (
-    <button key={cls}>{cls}</button>
+    <button key={cls} onClick={() => props.onSelect(props.label, cls)}>{cls}</button>
   ))
   return <div>
     <span>{props.label}</span>
@@ -106,6 +106,13 @@ class ClassificationResult extends React.Component {
     this.setState({
       selected: e
     })
+  }
+
+  handleEdit = (e, cls) => {
+    let content = this.props.content
+    content.result[e] = cls
+
+    this.props.onChange(content)
   }
 
   render() {
@@ -134,7 +141,7 @@ class ClassificationResult extends React.Component {
         </div>
         <div className='col-6'>
           { this.state.selected !== null ? 
-            <ClassPicker label={this.state.selected}></ClassPicker> :
+            <ClassPicker label={this.state.selected} onSelect={this.handleEdit}></ClassPicker> :
             <div></div>
           }
         </div>
