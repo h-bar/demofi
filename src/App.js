@@ -3,6 +3,7 @@ import './App.css';
 import { render } from '@testing-library/react';
 
 import { TextAreaIn, OptionBtnIn } from './components/input';
+import { ClassificationDisplay } from './components/display';
 import { getReq, postReq } from './request'
 
 const appStates = {
@@ -19,80 +20,15 @@ function SubmitBtn(props) {
   )
 }
 
-function ClassPicker(props) {
-  const classes = ['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB']
-  const classPanel = classes.map((cls) => (
-    <button key={cls} onClick={() => props.onSelect(props.label, cls)}>{cls}</button>
-  ))
-  return <div>
-    <span>{props.label}</span>
-    {classPanel}
-  </div>
-}
-
-class ClassificationResult extends React.Component {
-  state = {
-    selected: null
-  }
-
-  handleClick = (e) => {
-    this.setState({
-      selected: e
-    })
-  }
-
-  handleEdit = (e, cls) => {
-    let content = this.props.content
-    content.result[e] = cls
-
-    this.props.onChange(content)
-  }
-
-  render() {
-    let result = this.props.content.result
-    if (result === undefined) return <div></div>
-
-    let byClass = {}
-    for (let e in result) {
-      let cls = result[e]
-      if (!(cls in byClass)) {
-        byClass[cls] = []
-      }
-      byClass[cls].push(<button key={e} className="btn" onClick={() => this.handleClick(e)}>{e}</button>)
-    }
-
-    let classRows = []
-    for (let cls in byClass) {
-      classRows.push(<div key={cls}>
-        <span>{cls}: </span>{byClass[cls]}
-      </div>)
-    }
-    return (
-      <div className='row'>
-        <div className='col-6'>
-          {classRows}  
-        </div>
-        <div className='col-6'>
-          { this.state.selected !== null ? 
-            <ClassPicker label={this.state.selected} onSelect={this.handleEdit}></ClassPicker> :
-            <div></div>
-          }
-        </div>
-      </div>
-    )
-  }
-}
-
-
-function ResultPanel(props) {
-  let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(props.content));
-  return (
-    <div>
-      <ClassificationResult content={props.content} onChange={props.onChange}></ClassificationResult>
-      <a href={dataStr} download="result.json" className="btn btn-primary">Download Result</a>
-    </div>
-  )
-}
+// function ResultPanel(props) {
+//   let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(props.content));
+//   return (
+//     <div>
+     
+//       <a href={dataStr} download="result.json" className="btn btn-primary">Download Result</a>
+//     </div>
+//   )
+// }
 
 class App extends React.Component {
   state = {
@@ -179,7 +115,7 @@ class App extends React.Component {
           <TextAreaIn onUpdate={this.updateData} name="data.content" placeholder="Input some data"></TextAreaIn>
           <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf"]}></OptionBtnIn>
           <SubmitBtn appState={this.state.state} content="Submit" onClick={this.sendData}></SubmitBtn>
-          { this.state.state === appStates.responded ? <ResultPanel content={this.state.resp} onChange={this.updateResult}></ResultPanel> : <div></div>}
+          { this.state.state === appStates.responded ?  <ClassificationDisplay content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay> : <div></div>}
         </div>
       </div>
     );
