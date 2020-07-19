@@ -152,10 +152,11 @@ class ClassificationResult extends React.Component {
 
 
 function ResultPanel(props) {
+  let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(props.content));
   return (
     <div>
       <ClassificationResult content={props.content} onChange={props.onChange}></ClassificationResult>
-      <button className="btn btn-primary">Download Result</button>
+      <a href={dataStr} download="result.json" className="btn btn-primary">Download Result</a>
     </div>
   )
 }
