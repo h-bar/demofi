@@ -90,7 +90,7 @@ function SubmitBtn(props) {
 function ClassPicker(props) {
   const classes = ['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB']
   const classPanel = classes.map((cls) => (
-    <button>{cls}</button>
+    <button key={cls}>{cls}</button>
   ))
   return <div>
     <span>{props.label}</span>
@@ -119,12 +119,12 @@ class ClassificationResult extends React.Component {
       if (!(cls in byClass)) {
         byClass[cls] = []
       }
-      byClass[cls].push(<button onClick={() => this.handleClick(e)}>{e}</button>)
+      byClass[cls].push(<button key={e} onClick={() => this.handleClick(e)}>{e}</button>)
     }
 
     let classRows = []
     for (let cls in byClass) {
-      classRows.push(<div>
+      classRows.push(<div key={cls}>
         <span>{cls}: </span>{byClass[cls]}
       </div>)
     }
