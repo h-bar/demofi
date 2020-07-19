@@ -38,7 +38,7 @@ class OptionBtnIn extends React.Component {
 
   render() {
     const btns = this.props.options.map((option) => (
-      <button className="col-3"key={option} onClick={() => this.handleClick(option)}>{option}</button>
+      <button className="col-3 btn  btn-light"key={option} onClick={() => this.handleClick(option)}>{option}</button>
     ))
     return (
       <div className="row">
@@ -58,7 +58,7 @@ class LongTextIn extends React.Component {
   render() {
     return (
       <div className='row'>
-        <textarea  placeholder={this.props.placeholder} onChange={this.handleChange}></textarea>
+        <textarea style={{width: '100%'}} placeholder={this.props.placeholder} onChange={this.handleChange}></textarea>
       </div>
     )
   }
@@ -125,7 +125,7 @@ class ClassificationResult extends React.Component {
       if (!(cls in byClass)) {
         byClass[cls] = []
       }
-      byClass[cls].push(<button key={e} onClick={() => this.handleClick(e)}>{e}</button>)
+      byClass[cls].push(<button key={e} className="btn" onClick={() => this.handleClick(e)}>{e}</button>)
     }
 
     let classRows = []
@@ -222,10 +222,21 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <DataIn updateData={this.updateData} data={this.state.req}></DataIn>
-        <ParamIn updateData={this.updateData} data={this.state.req}></ParamIn>
-        <SubmitBtn appState={this.state.state} content="Submit" onClick={this.sendData}></SubmitBtn>
-        { this.state.state === appStates.responded ? <ResultPanel content={this.state.resp} onChange={this.updateResult}></ResultPanel> : <div></div>}
+        <div className="jumbotron">
+        <h1 className="display-4">Word Tagging Demo</h1>
+          <p className="lead">This is a simple Demo for classification and tagging tasks</p>
+          <hr className="my-4" />
+          <p>Enter a sentense below to get word tagging. Click on the result to edit the tagging result and download!</p>
+          <p className="lead">
+            <a className="btn btn-primary btn-lg" href="#" role="button">Github</a>
+          </p>
+        </div>
+        <div className="container">
+          <DataIn updateData={this.updateData} data={this.state.req}></DataIn>
+          <ParamIn updateData={this.updateData} data={this.state.req}></ParamIn>
+          <SubmitBtn appState={this.state.state} content="Submit" onClick={this.sendData}></SubmitBtn>
+          { this.state.state === appStates.responded ? <ResultPanel content={this.state.resp} onChange={this.updateResult}></ResultPanel> : <div></div>}
+        </div>
       </div>
     );
   }
