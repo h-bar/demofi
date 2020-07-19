@@ -13,23 +13,6 @@ const appStates = {
   'responded': 3
 }
 
-function SubmitBtn(props) {
-  let isDisable = props.appState === appStates.not_ready
-  return (
-    <button className="btn btn-primary" disabled={isDisable} onClick={props.onClick}>{props.content}</button>
-  )
-}
-
-// function ResultPanel(props) {
-//   let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(props.content));
-//   return (
-//     <div>
-     
-//       <a href={dataStr} download="result.json" className="btn btn-primary">Download Result</a>
-//     </div>
-//   )
-// }
-
 class App extends React.Component {
   state = {
     req: {
@@ -113,8 +96,14 @@ class App extends React.Component {
         <div className="container">
           <TextAreaIn onUpdate={this.updateData} name="data.content" placeholder="Input some data"></TextAreaIn>
           <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf"]}></OptionBtnIn>
-          <SubmitBtn appState={this.state.state} content="Submit" onClick={this.sendData}></SubmitBtn>
-          { this.state.state === appStates.responded ?  <ClassificationDisplay content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay> : <div></div>}
+          <button className="btn btn-primary" disabled={this.state.state === appStates.not_ready} onClick={this.sendData}>Get Tagging</button>
+          { this.state.state === appStates.responded ?  
+            <div>
+                <ClassificationDisplay content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay>
+                <a href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.resp))} download="result.json" className="btn btn-primary">Download Result</a>
+            </div> : 
+            <div></div>
+          }
         </div>
       </div>
     );
