@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { render } from '@testing-library/react';
 
-import { TextAreaIn, OptionBtnsIn } from './components/input';
+import { TextAreaIn, OptionBtnIn } from './components/input';
 import { getReq, postReq } from './request'
 
 const appStates = {
@@ -177,7 +177,7 @@ class App extends React.Component {
         </div>
         <div className="container">
           <TextAreaIn onUpdate={this.updateData} name="data.content" placeholder="Input some data"></TextAreaIn>
-          <OptionBtnsIn onUpdate={this.updateData} name="param.content" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf"]}></OptionBtnsIn>
+          <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf"]}></OptionBtnIn>
           <SubmitBtn appState={this.state.state} content="Submit" onClick={this.sendData}></SubmitBtn>
           { this.state.state === appStates.responded ? <ResultPanel content={this.state.resp} onChange={this.updateResult}></ResultPanel> : <div></div>}
         </div>

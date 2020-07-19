@@ -20,7 +20,7 @@ class ComponentIn extends React.Component {
   }
 }
 
-export class OptionBtnsIn extends ComponentIn {
+export class OptionBtnIn extends ComponentIn {
   /*
     Props:
     - onUpdate: function
