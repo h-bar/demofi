@@ -39,7 +39,6 @@ class App extends React.Component {
     state: appStates.not_ready,
     resp: {}
   }
-  resp_ori = {}
 
   dataReady = (data) => {
     for (const k in data) {
