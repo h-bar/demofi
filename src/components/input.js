@@ -30,10 +30,10 @@ export class OptionBtnIn extends ComponentIn {
 
   render() {
     const btns = this.props.options.map((option) => (
-      <button key={option} onClick={() => this.handleUpdate(option)}>{option}</button>
+      <button className='btn col-lg-2 col-sm-3' key={option} onClick={() => this.handleUpdate(option)}>{option}</button>
     ))
     return (
-      <div>
+      <div className='row'>
         {btns}
       </div>
     )
@@ -50,8 +50,8 @@ export class TextAreaIn extends ComponentIn {
  
   render() {
     return (
-      <div>
-        <textarea placeholder={this.props.placeholder} onChange={(e) => this.handleUpdate(e.target.value)}></textarea>
+      <div className='row'>
+        <textarea className='w-100 h-100' placeholder={this.props.placeholder} onChange={(e) => this.handleUpdate(e.target.value)}></textarea>
       </div>
     )
   }
