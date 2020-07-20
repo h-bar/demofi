@@ -97,7 +97,7 @@ class App extends React.Component {
           <button className="btn btn-primary" disabled={this.state.state === appStates.not_ready} onClick={this.sendData}>Get Tagging</button>
           { this.state.state === appStates.responded ?  
             <div>
-                <ClassificationDisplay content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay>
+                <ClassificationDisplay classes={['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB'] }content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay>
                 <a href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.resp))} download="result.json" className="btn btn-primary">Download Result</a>
             </div> : 
             <div></div>

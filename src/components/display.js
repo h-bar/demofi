@@ -46,7 +46,7 @@ export class ClassificationDisplay extends React.Component {
         </div>
         <div className='col-6'>
           { this.state.selected !== null ? 
-            <OptionBtnIn options={['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB']} name={this.state.selected} onUpdate={this.handleEdit} ></OptionBtnIn> :
+            <OptionBtnIn options={this.props.classes} name={this.state.selected} onUpdate={this.handleEdit} ></OptionBtnIn> :
             <div></div>
           }
         </div>
