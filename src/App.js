@@ -92,13 +92,21 @@ class App extends React.Component {
           </p>
         </div>
         <div className="container">
-          <TextAreaIn onUpdate={this.updateData} name="data.content" placeholder="Input some data"></TextAreaIn>
-          <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf"]}></OptionBtnIn>
-          <button className="btn btn-primary" disabled={this.state.state === appStates.not_ready} onClick={this.sendData}>Get Tagging</button>
+          <div>
+            <div style={{height: '200px'}} className="mb-4"> 
+              <TextAreaIn onUpdate={this.updateData} name="data.content" placeholder="Input some data"></TextAreaIn>  
+            </div>
+            <div  className="mb-4">
+              <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf", "sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf",]}></OptionBtnIn>
+            </div>
+            <div className='row justify-content-center mb-4'>
+              <button className="btn btn-lg btn-primary" disabled={this.state.state === appStates.not_ready} onClick={this.sendData}>Get Tagging</button>
+            </div>
+          </div>
           { this.state.state === appStates.responded ?  
             <div>
                 <ClassificationDisplay classes={['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB'] }content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay>
-                <a href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.resp))} download="result.json" className="btn btn-primary">Download Result</a>
+                <a ref={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.resp))} download="result.json" className="btn btn-lg btn-primary">Download Result</a>
             </div> : 
             <div></div>
           }

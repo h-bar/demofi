@@ -41,10 +41,10 @@ export class ClassificationDisplay extends React.Component {
     }
     return (
       <div className='row'>
-        <div className='col-6'>
+        <div className='col-md-6 col-sm-12'>
           {classRows}  
         </div>
-        <div className='col-6'>
+        <div className='col-md-6 col-sm-12'>
           { this.state.selected !== null ? 
             <OptionBtnIn options={this.props.classes} name={this.state.selected} onUpdate={this.handleEdit} ></OptionBtnIn> :
             <div></div>

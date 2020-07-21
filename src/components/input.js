@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Row, Container, Button } from "reactstrap";
 class ComponentIn extends React.Component {
   /*
   Props:
@@ -30,10 +31,10 @@ export class OptionBtnIn extends ComponentIn {
 
   render() {
     const btns = this.props.options.map((option) => (
-      <button className='btn col-lg-2 col-sm-3' key={option} onClick={() => this.handleUpdate(option)}>{option}</button>
+      <button style={{boxSizing: "content-box"}} className='btn btn-secondary col-lg-2 col-sm-3 col-6 mx-1 my-1' key={option} onClick={() => this.handleUpdate(option)}>{option}</button>
     ))
     return (
-      <div className='row'>
+      <div style={{maxHeight: '400px'}} className='row align-content-start overflow-auto'>
         {btns}
       </div>
     )
@@ -50,9 +51,9 @@ export class TextAreaIn extends ComponentIn {
  
   render() {
     return (
-      <div className='row'>
-        <textarea className='w-100 h-100' placeholder={this.props.placeholder} onChange={(e) => this.handleUpdate(e.target.value)}></textarea>
-      </div>
+      <Row className='h-100'>
+        <textarea className='col-12' placeholder={this.props.placeholder} onChange={(e) => this.handleUpdate(e.target.value)}></textarea>
+      </Row>
     )
   }
 }
