@@ -107,8 +107,10 @@ class App extends React.Component {
             { this.state.state === appStates.responded ?  
               <section>
                   <ClassificationDisplay classes={['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB']} content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay>
-                  <a ref={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.resp))} download="result.json" className="btn btn-lg btn-primary mb-5">Download Result</a>
-              </section> : 
+                  <div className="w-100 text-center">
+                    <a href={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.resp))} download="result.json" className="btn btn-lg btn-primary mb-5">Download Result</a>
+                  </div>
+                  </section> : 
               <div></div>
             }
           </div>
