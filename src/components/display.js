@@ -30,17 +30,20 @@ export class ClassificationDisplay extends React.Component {
       if (!(cls in byClass)) {
         byClass[cls] = []
       }
-      byClass[cls].push(<button key={e} className="btn" onClick={() => this.handleClick(e)}>{e}</button>)
+      byClass[cls].push(<span key={e} className="btn btn-primary mr-1" onClick={() => this.handleClick(e)}>{e}</span>)
     }
 
     let classRows = []
     for (let cls in byClass) {
-      classRows.push(<div key={cls}>
-        <span>{cls}: </span>{byClass[cls]}
-      </div>)
+      classRows.push(<h4 key={cls}>{cls}: {byClass[cls]} </h4>)
     }
     return (
-      <div className='row'>
+      <div className='row mb-5'>
+        <div className="col-12">
+          <blockquote class="blockquote">
+            <p class="mb-0">Click a word to modify it's class</p>
+          </blockquote>
+        </div>
         <div className='col-md-6 col-sm-12'>
           {classRows}  
         </div>
