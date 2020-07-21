@@ -98,7 +98,7 @@ class App extends React.Component {
                 <TextAreaIn onUpdate={this.updateData} name="data.content" placeholder="Input some data"></TextAreaIn>  
               </div>
               <div  className="mb-4">
-                <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["option A", "option B", "option C", "option D", "option E", "option F"]}></OptionBtnIn>
+                <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["option A", "option B", "option C", "option D", "option E", "option F"]} default="option A"></OptionBtnIn>
               </div>
               <div className='row justify-content-center mb-4'>
                 <button className="btn btn-lg btn-primary mb-5" disabled={this.state.state === appStates.not_ready} onClick={this.sendData}>Get Tagging</button>
@@ -114,7 +114,7 @@ class App extends React.Component {
           </div>
         </div>
         <footer className="text-muted">
-          <div class="container">
+          <div className="container">
             A simple tagging demo created using demofi
           </div>
         </footer>
