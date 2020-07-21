@@ -98,7 +98,7 @@ class App extends React.Component {
                 <TextAreaIn onUpdate={this.updateData} name="data.content" placeholder="Input some data"></TextAreaIn>  
               </div>
               <div  className="mb-4">
-                <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf", "dsdfsdf", "sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf","sdfd", "sdsf", "sdfs", "dsfsfdfs", "dsfsdfsdf", "dfsfdfs", "sdfdsf",]}></OptionBtnIn>
+                <OptionBtnIn onUpdate={this.updateData} name="param.content" options={["option A", "option B", "option C", "option D", "option E", "option F"]}></OptionBtnIn>
               </div>
               <div className='row justify-content-center mb-4'>
                 <button className="btn btn-lg btn-primary mb-5" disabled={this.state.state === appStates.not_ready} onClick={this.sendData}>Get Tagging</button>
@@ -106,7 +106,7 @@ class App extends React.Component {
             </section>
             { this.state.state === appStates.responded ?  
               <section>
-                  <ClassificationDisplay classes={['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB'] }content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay>
+                  <ClassificationDisplay classes={['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB']} content={this.state.resp} onChange={this.updateResult}></ClassificationDisplay>
                   <a ref={"data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.resp))} download="result.json" className="btn btn-lg btn-primary mb-5">Download Result</a>
               </section> : 
               <div></div>
