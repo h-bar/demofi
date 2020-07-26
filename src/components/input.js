@@ -7,10 +7,6 @@ class ComponentIn extends React.Component {
     - name: string
   */
 
-  constructor(props) {
-    super(props)
-  }
-
   handleUpdate = (value) => {
     this.props.onUpdate(this.props.name, value)
   }
