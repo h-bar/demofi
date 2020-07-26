@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Row, Container, Button } from "reactstrap";
 class ComponentIn extends React.Component {
   /*
   Props:
@@ -75,9 +74,9 @@ export class TextAreaIn extends ComponentIn {
  
   render() {
     return (
-      <Row className='h-100'>
+      <div className='row h-100'>
         <textarea className='col-12' placeholder={this.props.placeholder} onChange={(e) => this.handleUpdate(e.target.value)}></textarea>
-      </Row>
+      </div>
     )
   }
 }
