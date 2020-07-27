@@ -2,58 +2,97 @@ import React from 'react'
 
 import { OptionBtnIn } from './input'
 
-export class ClassificationDisplay extends React.Component {
+class ResultDisplay extends React.Component {
   state = {
     selected: null
   }
 
-  handleClick = (e) => {
+  handleSelection = (item) => {
     this.setState({
-      selected: e
+      selected: item
     })
   }
 
-  handleEdit = (e, cls) => {
-    let content = this.props.content
-    content.result[e] = cls
+  resultUpdate = (item, value) => {
+  }
 
-    this.props.onChange(content)
+  handleEdit = (item, value) => {
+    let result = this.resultUpdate(item, value)
+    this.props.onChange(result)
+  }
+
+  RenderTitle = () => {
+    return false
+  }
+
+  RenderDisplay = () => {
+    return false
+  }
+
+  RenderEdit = () => {
+    return false
   }
 
   render() {
-    let result = this.props.content.result
-    if (result === undefined) return <div></div>
-
-    let byClass = {}
-    for (let e in result) {
-      let cls = result[e]
-      if (!(cls in byClass)) {
-        byClass[cls] = []
-      }
-      byClass[cls].push(<span key={e} className="btn btn-primary mr-1" onClick={() => this.handleClick(e)}>{e}</span>)
-    }
-
-    let classRows = []
-    for (let cls in byClass) {
-      classRows.push(<h4 key={cls}>{cls}: {byClass[cls]} </h4>)
-    }
+    if (this.props.content.result === undefined) return false
     return (
       <div className='row mb-5'>
         <div className="col-12">
-          <blockquote class="blockquote">
-            <p class="mb-0">Click a word to modify it's class</p>
-          </blockquote>
+          <this.RenderTitle></this.RenderTitle>
         </div>
         <div className='col-md-6 col-sm-12'>
-          {classRows}  
+          <this.RenderDisplay></this.RenderDisplay>
         </div>
         <div className='col-md-6 col-sm-12'>
-          { this.state.selected !== null ? 
-            <OptionBtnIn options={this.props.classes} default={result[this.state.selected]} name={this.state.selected} onUpdate={this.handleEdit} ></OptionBtnIn> :
-            <div></div>
-          }
+          { this.state.selected !== null ? <this.RenderEdit></this.RenderEdit> : false }
         </div>
       </div>
     )
+  }
+}
+
+export class ClassificationDisplay extends ResultDisplay {
+  // Data format: {
+  //   tokens: [],
+  //   labels: [],
+  // }
+  // This is a very very very very good example of a very long sentence with duplicated words
+  resultUpdate = (idx, value) => {
+    let result = this.props.content
+    result.result.labels[idx] = value
+
+    return result
+  }
+
+  RenderTitle = () => {
+    return (<blockquote className="blockquote">
+      <p className="mb-0">Click a word to modify it's class</p>
+    </blockquote>)
+  }
+
+  RenderDisplay = () => {
+    let result = this.props.content.result
+
+    let byLabel = {}
+    for (let i in result.tokens) {
+      let t = result.tokens[i]
+      let l = result.labels[i]
+      if (!(l in byLabel)) {
+        byLabel[l] = []
+      }
+      byLabel[l].push(<span key={i+'-'+t} className="btn btn-primary mr-1 md-1" onClick={() => this.handleSelection(i)}>{t}</span>)
+    }
+
+    let labelRows = []
+    for (let l in byLabel) {
+      labelRows.push(<h4 key={l}>{l}: {byLabel[l]} </h4>)
+    }
+    return (<div>{labelRows}</div>)
+  }
+
+  RenderEdit = () => { 
+    let result = this.props.content.result
+    let l = result.labels[this.state.selected]
+    return <OptionBtnIn options={this.props.labels} default={l} name={this.state.selected} onUpdate={this.handleEdit}></OptionBtnIn> 
   }
 }
