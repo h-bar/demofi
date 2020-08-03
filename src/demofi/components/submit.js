@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectData, selectParam, runModel } from "../slice";
+import { selectData, selectParam, runModel, reset } from "../slice";
 
 export const Submit = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,8 @@ export const Submit = () => {
 
   return (
     <div className="row justify-content-center mb-4">
-      <button className="btn btn-lg btn-primary mb-5" onClick={handleSubmit}>Get Tagging</button>
+      <button className="btn btn-lg btn-primary mb-5 mx-2" onClick={handleSubmit}>Get Tagging</button>
+      <button className="btn btn-lg btn-primary mb-5 mx-2" onClick={() => dispatch(reset())}>Reset</button>
     </div>
   );
 }

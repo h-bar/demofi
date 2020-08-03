@@ -11,7 +11,7 @@ export const runModel = createAsyncThunk('runModel', async (payload) => {
 const demofiSlice = createSlice({
   name: "demofi",
   initialState: {
-    data: demofiConfig.inputPlaceholder,
+    data: demofiConfig.inputPlaceHolder,
     param: demofiConfig.defaultAction,
     resp: []
   },
@@ -27,6 +27,9 @@ const demofiSlice = createSlice({
         if(idx === parseInt(action.payload.labelIdx)) { return action.payload.label }
         else { return label}
       })
+    },
+    reset: (state) => {
+      state.resp = [];
     }
   },
   extraReducers: {
@@ -52,7 +55,8 @@ export const selectResults = state => state.demofi.resp.map((resp, idx) => resp.
 export const {
   updateData,
   updateParam,
-  updateResult
+  updateResult,
+  reset
 } = demofiSlice.actions;
 export const demofiReducer = demofiSlice.reducer;
 
