@@ -14,7 +14,7 @@ export const Download = props => {
   const results = useSelector(selectResults)
   let downloadBtns = []
   for (let d of demofiDownloads) {
-    downloadBtns.push(<DownloadBtn label={d.label} downloadString={d.transform(results)}/>)
+    downloadBtns.push(<DownloadBtn key={d.label} label={d.label} downloadString={d.transform(results)}/>)
   }
 
   return (
