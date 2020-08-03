@@ -12,6 +12,8 @@ export const demofiConfig = {
   availableLabels: ['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB'],
 }
 
+
+// Transform function returns the string that will be downloaded
 export const demofiDownloads = [
   {
     label: "RawData",
