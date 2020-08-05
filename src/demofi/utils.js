@@ -10,7 +10,7 @@ export const TextInput = props => (
   </div>
 );
 
-export const OptionButInput = props => {
+export const OptionBtnInput = props => {
   const btns = props.options.map(option => {
     let btnCls = "btn-info";
     if (option === props.selected) {
@@ -71,7 +71,7 @@ export const ClassificationDisplay = props => {
         {
           selectedIdx === null
           ? null
-          : <OptionButInput options={props.labels} selected={result.labels[selectedIdx]} onSelect={(value) => props.onEdit(selectedIdx, value)}></OptionButInput>
+          : <OptionBtnInput options={props.labels} selected={result.labels[selectedIdx]} onSelect={(value) => props.onEdit(selectedIdx, value)}></OptionBtnInput>
         } 
       </div>
     </div>
