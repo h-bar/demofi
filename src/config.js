@@ -9,7 +9,7 @@ export const demofiConfig = {
   ],
   defaultAction: "option A",
   inputPlaceHolder: "Input Some Data",
-  availableLabels: ['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB'],
+  availableLabels: ['NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB','NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB', 'NN', 'JJ', 'DT', 'UH', 'VBZ', 'RB'],
 }
 
 

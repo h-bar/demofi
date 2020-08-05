@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactModal from 'react-modal';
 
 export const TextInput = props => (
   <div className="row h-100">
@@ -58,22 +59,41 @@ export const ClassificationDisplay = props => {
   }
 
   return (
-    <div className='row mb-5'>
-      <div className="col-12">
-        <blockquote className="blockquote">
-          <p className="mb-0">Click a word to modify it's class</p>
-        </blockquote>
+    <div>
+      <div className='row mb-5'>
+        <div className="col-12">
+          <blockquote className="blockquote">
+            <p className="mb-0">Click a word to modify it's class</p>
+          </blockquote>
+        </div>
+        <div className='col-sm-12'>
+          {labelRows}
+        </div>
       </div>
-      <div className='col-md-6 col-sm-12'>
-        {labelRows}
-      </div>
-      <div className='col-md-6 col-sm-12'>
-        {
-          selectedIdx === null
-          ? null
-          : <OptionBtnInput options={props.labels} selected={result.labels[selectedIdx]} onSelect={(value) => props.onEdit(selectedIdx, value)}></OptionBtnInput>
-        } 
-      </div>
+      
+      <ReactModal 
+        isOpen={selectedIdx !== null} 
+        style={{
+          coverlay: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.75)'
+          },          
+          content: {
+            top: '200px',
+            bottom: 'auto',
+            border: '0px',
+            backgroundColor: 'unset',
+            outline: 'none',
+          }}} 
+        contentLabel={"Choose a label for" + result.labels[selectedIdx]}
+        onRequestClose={() => setSelectedIdx(null)}
+      >
+        <OptionBtnInput options={props.labels} selected={result.labels[selectedIdx]} onSelect={(value) => { setSelectedIdx(null); props.onEdit(selectedIdx, value)}}></OptionBtnInput>
+      </ReactModal>
     </div>
   )
 };
