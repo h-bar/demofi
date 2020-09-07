@@ -12,7 +12,7 @@ export const Header = () => (
       the tagging result and download!
     </p>
     <p className="lead">
-      <a className="btn btn-primary btn-lg" href="#" role="button">
+      <a className="btn btn-primary btn-lg" href="https://github.com/h-bar/demofi" target="_blank" rel="noopener noreferrer"  role="button">
         Github
       </a>
     </p>
