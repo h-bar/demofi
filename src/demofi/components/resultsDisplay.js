@@ -10,7 +10,7 @@ export const ResultsDisplay = () => {
   
   let resDispaly = []
   for (let i in results) {
-    resDispaly.push(<ClassificationDisplay key={i} labels={demofiConfig.availableLabels} result={results[i]} onEdit={(idx, label) => dispatch(updateResult({resIdx: i, labelIdx: idx, label, label}))}/>)
+    resDispaly.push(<ClassificationDisplay key={i} labels={demofiConfig.availableLabels} result={results[i]} onEdit={(idx, label) => dispatch(updateResult({resIdx: i, labelIdx: idx, label: label}))}/>)
   }
   return (
     <div>
